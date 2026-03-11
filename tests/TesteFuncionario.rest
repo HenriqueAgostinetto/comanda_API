@@ -1,0 +1,35 @@
+GET http://localhost:8000/funcionario/
+
+GET http://localhost:8000/funcionario/1
+
+
+
+POST http://localhost:8000/funcionario/
+content-type: application/json
+
+{
+"nome": "Henrique",
+"matricula": "123",
+"cpf": "123456789",
+"telefone": "499999999",
+"grupo": 1,
+"senha": "123"
+}
+
+
+
+PUT http://localhost:8000/funcionario/1
+content-type: application/json
+
+{
+"nome": "Henrique",
+"matricula": "123",
+"cpf": "123456789",
+"telefone": "499999999",
+"grupo": 1,
+"senha": "123"
+}
+
+# Henrique Agostinetto Piva
+
+DELETE http://localhost:8000/funcionario/1

@@ -1,0 +1,31 @@
+GET http://localhost:8000/cliente/
+
+
+
+GET http://localhost:8000/cliente/1
+
+
+
+POST http://localhost:8000/cliente/
+content-type: application/json
+
+{
+"nome": "Henrique",
+"cpf": "123456789",
+"telefone": "499999999"
+}
+
+
+
+PUT http://localhost:8000/cliente/1
+content-type: application/json
+
+{
+"nome": "Henrique",
+"cpf": "123456789",
+"telefone": "499999999"
+}
+
+# Henrique Agostinetto Piva
+
+DELETE http://localhost:8000/cliente/1

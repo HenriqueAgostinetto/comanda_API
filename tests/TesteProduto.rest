@@ -1,0 +1,33 @@
+GET http://localhost:8000/produto/
+
+
+
+GET http://localhost:8000/produto/1
+
+
+
+POST http://localhost:8000/produto/
+content-type: application/json
+
+{
+"nome": "Pastel",
+"descricao": "Pastel de carne",
+"foto": "123",
+"valor_unitario": 10
+}
+
+# Henrique Agostinetto Piva
+
+PUT http://localhost:8000/produto/1
+content-type: application/json
+
+{
+"nome": "Pastel",
+"descricao": "Pastel de carne",
+"foto": "123",
+"valor_unitario": 10
+}
+
+
+
+DELETE http://localhost:8000/produto/1
