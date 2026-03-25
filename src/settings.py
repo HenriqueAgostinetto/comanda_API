@@ -1,4 +1,5 @@
 from dotenv import load_dotenv, find_dotenv
+from src.settings import get_connection
 import os
 
 dotenv_file = find_dotenv()
