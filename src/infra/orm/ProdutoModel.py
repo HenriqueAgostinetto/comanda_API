@@ -1,4 +1,4 @@
-from infra import database
+from src.infra import database
 from sqlalchemy import Column, VARCHAR, DECIMAL, Integer, BLOB
 
 # ORM

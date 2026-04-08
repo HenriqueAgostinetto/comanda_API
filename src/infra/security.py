@@ -2,10 +2,10 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import JWTError, jwt
 from fastapi import HTTPException, status
-from settings import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, REFRESH_TOKEN_EXPIRE_DAYS
+from src.settings import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, REFRESH_TOKEN_EXPIRE_DAYS
 import bcrypt
 
-# Funções de hash usando bcrypt diretamente
+# Funções de hash usando bcrypt 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verifica se a senha plain corresponde ao hash"""
     try:
