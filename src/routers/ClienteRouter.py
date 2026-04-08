@@ -3,18 +3,18 @@ from sqlalchemy.orm import Session
 from typing import List
 
 # Domain Schemas
-from domain.schemas.ClienteSchema import (
+from src.domain.schemas.ClienteSchema import (
     ClienteCreate, 
     ClienteUpdate, 
     ClienteResponse
 )
-from domain.schemas.AuthSchema import FuncionarioAuth
+from src.domain.schemas.AuthSchema import FuncionarioAuth
 
 # Infra
-from infra.orm.ClienteModel import ClienteDB
-from infra.database import get_db
+from src.infra.orm.ClienteModel import ClienteDB
+from src.infra.database import get_db
 #from infra.security import get_password_hash
-from infra.dependencies import get_current_active_user, require_group
+from src.infra.dependencies import get_current_active_user, require_group
 
 router = APIRouter()
 

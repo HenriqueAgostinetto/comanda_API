@@ -11,7 +11,7 @@ from slowapi.errors import RateLimitExceeded
 # Routers
 from src.routers import (
     FuncionarioRouter,
-    ClienteRouter,
+    ClienteRouter,                              # Henrique Agostinetto Piva
     ProdutoRouter,
     AuthRouter,
     AuditoriaRouter,
@@ -61,5 +61,3 @@ app.include_router(HealthRouter.router)
 # Run
 if __name__ == "__main__":
     uvicorn.run("src.main:app", host=HOST, port=int(PORT), reload=RELOAD)
-
-    # Henrique Agostinetto Piva

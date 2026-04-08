@@ -2,17 +2,18 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from datetime import timedelta
 
-from domain.schemas.AuthSchema import LoginRequest, TokenResponse, RefreshTokenRequest, FuncionarioAuth
+from src.domain.schemas.AuthSchema import LoginRequest, TokenResponse, RefreshTokenRequest, FuncionarioAuth
 
-from infra.orm.FuncionarioModel import FuncionarioDB
-from infra.database import get_db
-from infra.security import verify_password, create_access_token, create_refresh_token, verify_refresh_token
-from infra.dependencies import get_current_active_user, limiter, get_rate_limit
+from src.infra.orm.FuncionarioModel import FuncionarioDB
+from src.infra.database import get_db
+from src.infra.security import verify_password, create_access_token, create_refresh_token, verify_refresh_token
+from src.infra.dependencies import get_current_active_user
+from src.infra.rate_limit import limiter, get_rate_limit
 
 from src.settings import ACCESS_TOKEN_EXPIRE_MINUTES, REFRESH_TOKEN_EXPIRE_DAYS
-
+                                                                                            # Henrique Agostinetto Piva
 # Auditoria
-from src.services.AuditoriaService import AuditoriaService
+from src.infra.services.AuditoriaService import AuditoriaService
 
 router = APIRouter()
 

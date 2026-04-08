@@ -7,7 +7,7 @@ import bcrypt
 
 # Funções de hash usando bcrypt 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verifica se a senha plain corresponde ao hash"""
+    """Verifica se a senha plain corresponde ao hash"""                                             # Henrique Agostinetto Piva
     try:
         return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
     except Exception:

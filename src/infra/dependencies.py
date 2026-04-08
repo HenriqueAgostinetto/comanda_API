@@ -18,7 +18,7 @@ def get_current_user(
 ) -> FuncionarioAuth:
     """Dependency que valida o token e retorna o usuário atual"""
 
-    # Extrai e valida o token
+    # Extrai e valida o token                                                       # Henrique Agostinetto Piva
     payload = verify_access_token(credentials.credentials)
     cpf: str = payload.get("sub")
     id_funcionario: int = payload.get("id")

@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 # cria o engine do banco de dados
 engine = create_engine(STR_DATABASE, echo=True)
 
-# session -> Session = sessionmaker(bind=engine)
+# session -> Session = sessionmaker(bind=engine)                                # Henrique Agostinetto Piva
 # cria a sessão do banco de dados
 Session = sessionmaker(bind=engine, autocommit=False, autoflush=True)
 

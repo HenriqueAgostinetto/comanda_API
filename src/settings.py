@@ -2,7 +2,7 @@ from dotenv import load_dotenv, find_dotenv
 import os
 
 # localiza o arquivo de .env
-dotenv_file = find_dotenv()
+dotenv_file = find_dotenv()                                     # Henrique Agostinetto Piva
 
 # Carrega o arquivo .env
 load_dotenv(dotenv_file)
@@ -16,7 +16,7 @@ RELOAD = os.getenv("RELOAD", True)
 DB_SGDB = os.getenv("DB_SGDB")
 DB_NAME = os.getenv("DB_NAME")
 # Caso seja diferente de sqlite
-DB_HOST = os.getenv("DB_HOST")
+DB_HOST = os.getenv("DB_HOST")                                                  
 DB_USER = os.getenv("DB_USER")
 DB_PASS = os.getenv("DB_PASS")
 

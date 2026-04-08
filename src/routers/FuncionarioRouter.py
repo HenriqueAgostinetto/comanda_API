@@ -8,16 +8,16 @@ from src.domain.schemas.FuncionarioSchema import (
     FuncionarioUpdate,
     FuncionarioResponse
 )
-from src.domain.schemas.AuthSchema import FuncionarioAuth
+from src.domain.schemas.AuthSchema import FuncionarioAuth                   # Henrique Agostinetto Piva
 
 # Infra
 from src.infra.orm.FuncionarioModel import FuncionarioDB
 from src.infra.database import get_db
 from src.infra.security import get_password_hash
-from src.infra.dependencies import get_current_active_user, require_group, get_rate_limit
-from src.infra.rate_limit import limiter
+from src.infra.dependencies import get_current_active_user, require_group
+from src.infra.rate_limit import limiter, get_rate_limit
 # Auditoria
-from src.services.AuditoriaService import AuditoriaService
+from src.infra.services.AuditoriaService import AuditoriaService
 
 router = APIRouter()
 

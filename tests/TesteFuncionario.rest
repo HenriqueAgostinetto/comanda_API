@@ -1,85 +1,64 @@
-### Verbo GET – listar todos
-GET http://localhost:8000/funcionario/ HTTP/1.1
+# Henrique Agostinetto Piva
 
-### Verbo GET – listar um
-GET http://localhost:8000/funcionario/10 HTTP/1.1
+### Health Check da API
+GET http://localhost:8000/health HTTP/1.1
 
-### Verbo POST – adicionar
+### Testar Rate Limit
+GET http://localhost:8000/health HTTP/1.1
+
+### Verbo POST – adicionar funcionario
 POST http://localhost:8000/funcionario/ HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "admin",
-    "matricula": "admin",
-    "cpf": "00123456789",
-    "telefone": "001",
+    "nome": "henrique agostinetto piva ",
+    "matricula": "9999",
+    "cpf": "11122233344",
+    "telefone": "99999999",
     "grupo": 1,
-    "senha": "admin",
-    "email": "admin@provedor.net"
+    "senha": "senha",
+    "email": "teste@auditoria.com"
 }
-
-### Verbo PUT – atualiza
-PUT http://localhost:8000/funcionario/1 HTTP/1.1
-content-type: application/json
-
-{
-    "nome": "henrique agostinetto piva atualizado",
-    "matricula": "00000000001",
-    "cpf": "01349677982",
-    "telefone": "240028922",
-    "grupo": 1,
-    "senha": "Opala1977",
-    "email": "henrique@provedor.net"
-}
-
-### Verbo DELETE - excluir
-DELETE http://localhost:8000/funcionario/4 HTTP/1.1
 
 ### Login para obter access e refresh tokens
-POST http://127.0.0.1:8000/auth/login HTTP/1.1
+POST http://localhost:8000/auth/login HTTP/1.1
 content-type: application/json
 
 {
-"cpf" : "01349677981",
-"senha" : "opaalao1977"
+    "cpf": "11122233344",
+    "senha": "senha"
 }
 
 ### token gerado
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5ODc2NTQzMjEwMiIsImlkIjoxLCJncnVwbyI6MSwiZXhwIjoxNzc0OTM0OTA0LCJ0eXBlIjoiYWNjZXNzIn0.113xLdd6tBCbO4BCSm4be9HBLcO7k1icP2t5Kjxld-o
-@refresh_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5ODc2NTQzMjEwMiIsImlkIjoxLCJncnVwbyI6MSwiZXhwIjoxNzc1NTMyOTMxLCJ0eXBlIjoicmVmcmVzaCJ9.VPaIWzk15Ev0ITOa36jVohCK69qgN6lMsHrPrAH795A
-### testar access token para acessar endpoint protegido
-GET http://127.0.0.1:8000/auth/me HTTP/1.1
-Authorization: Bearer {{access_token}}
+@access_token = cole_o_token_aqui
 
-### Usar refresh token para obter novos tokens
-POST http://localhost:8000/auth/refresh
-Content-Type: application/json
-
-{
-    "refresh_token": "{{refresh_token}}"
-}
-
-# token
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5ODc2NTQzMjEwMiIsImlkIjoxLCJncnVwbyI6MSwiZXhwIjoxNzc0OTM0OTA0LCJ0eXBlIjoiYWNjZXNzIn0.113xLdd6tBCbO4BCSm4be9HBLcO7k1icP2t5Kjxld-o
-
-### Verbo GET – listar todos
-GET http://localhost:8000/funcionario/ HTTP/1.1
-Authorization: Bearer {{access_token}}
-
-### Verbo GET – listar um
-GET http://localhost:8000/funcionario/2 HTTP/1.1
-Authorization: Bearer {{access_token}}
-
-### Verbo PUT – atualiza
-PUT http://127.0.0.1:8000/funcionario/2 HTTP/1.1
+### Verbo PUT – atualiza cliente
+PUT http://localhost:8000/cliente/1 HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{access_token}}
+
 {
-"nome" : "Luciano Coelho atualizado"
+    "nome": "Cliente Teste",
+    "cpf": "12312312312",
+    "telefone": "00000000"
 }
 
-### Verbo DELETE - excluir
-DELETE http://127.0.0.1:8000/funcionario/1 HTTP/1.1
+### Verbo DELETE - excluir produto
+DELETE http://localhost:8000/produto/1 HTTP/1.1
 Authorization: Bearer {{access_token}}
 
-# Henrique Agostinetto Piva
+### Verbo GET - listar auditoria filtro CREATE
+GET http://localhost:8000/auditoria?acao=CREATE HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+### Verbo GET - listar auditoria filtro UPDATE
+GET http://localhost:8000/auditoria?acao=UPDATE HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+### Verbo GET - listar auditoria filtro DELETE
+GET http://localhost:8000/auditoria?acao=DELETE HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+### Verbo GET - listar auditoria filtro LOGIN
+GET http://localhost:8000/auditoria?acao=LOGIN HTTP/1.1
+Authorization: Bearer {{access_token}}

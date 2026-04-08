@@ -3,13 +3,13 @@ from sqlalchemy.orm import Session
 from typing import List
 
 # Domain Schemas
-from domain.schemas.ProdutoSchema import ProdutoCreate, ProdutoUpdate, ProdutoResponse, ProdutoPublicResponse
-from domain.schemas.AuthSchema import FuncionarioAuth
+from src.domain.schemas.ProdutoSchema import ProdutoCreate, ProdutoUpdate, ProdutoResponse, ProdutoPublicResponse
+from src.domain.schemas.AuthSchema import FuncionarioAuth
 
 # Infra
-from infra.orm.ProdutoModel import ProdutoDB
-from infra.database import get_db
-from infra.dependencies import get_current_active_user, require_group
+from src.infra.orm.ProdutoModel import ProdutoDB
+from src.infra.database import get_db
+from src.infra.dependencies import get_current_active_user, require_group
 
 router = APIRouter()
 
