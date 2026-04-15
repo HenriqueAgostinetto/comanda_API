@@ -1,0 +1,56 @@
+from pydantic import BaseModel, ConfigDict
+from typing import Optional
+from datetime import datetime
+
+from src.domain.schemas.FuncionarioSchema import FuncionarioResponse
+from src.domain.schemas.ClienteSchema import ClienteResponse
+from src.domain.schemas.ProdutoSchema import ProdutoResponse
+
+# henrique agostinetto piva
+
+class ComandaCreate(BaseModel):
+    comanda: str
+    status: int
+    cliente_id: Optional[int] = None
+    funcionario_id: int
+
+class ComandaUpdate(BaseModel):
+    comanda: Optional[str] = None
+    status: Optional[int] = None
+    cliente_id: Optional[int] = None
+    funcionario_id: Optional[int] = None
+
+class ComandaResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    comanda: str
+    data_hora: datetime
+    status: int
+    funcionario_id: int
+    funcionario: Optional[FuncionarioResponse] = None
+    cliente_id: Optional[int] = None
+    cliente: Optional[ClienteResponse] = None
+
+# schemas de produtos da comanda
+class ComandaProdutosCreate(BaseModel):
+    produto_id: int
+    quantidade: int
+    valor_unitario: float
+    funcionario_id: int
+
+class ComandaProdutosUpdate(BaseModel):
+    quantidade: Optional[int] = None
+    valor_unitario: Optional[float] = None
+    funcionario_id: Optional[int] = None
+
+class ComandaProdutosResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    comanda_id: int
+    produto_id: int
+    produto: Optional[ProdutoResponse] = None
+    quantidade: int
+    valor_unitario: float
+    funcionario_id: int
+    funcionario: Optional[FuncionarioResponse] = None
+    data_hora: datetime

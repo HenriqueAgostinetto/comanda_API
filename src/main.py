@@ -11,11 +11,12 @@ from slowapi.errors import RateLimitExceeded
 # Routers
 from src.routers import (
     FuncionarioRouter,
-    ClienteRouter,                              # Henrique Agostinetto Piva
+    ClienteRouter,                                      # Henrique Agostinetto Piva
     ProdutoRouter,
     AuthRouter,
     AuditoriaRouter,
-    HealthRouter
+    HealthRouter,
+    ComandaRouter
 )
 
 # Database
@@ -56,6 +57,7 @@ app.include_router(ClienteRouter.router)
 app.include_router(ProdutoRouter.router)
 app.include_router(AuditoriaRouter.router)
 app.include_router(HealthRouter.router)
+app.include_router(ComandaRouter.router)
 
 
 # Run

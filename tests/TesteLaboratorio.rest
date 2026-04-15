@@ -1,0 +1,82 @@
+# lab pratico avaliacao
+# henrique agostinetto piva
+
+# configs iniciais
+@access_token = SEU_TOKEN_AQUI
+@url = http://127.0.0.1:8000
+
+# 1. cria nova comanda 12345
+POST {{url}}/comanda/
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "comanda": "12345",
+    "status": 0,
+    "funcionario_id": 1
+}
+
+# 2. insere pastel de carne qtd 5
+POST {{url}}/comanda/1/produto
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "produto_id": 1,
+    "quantidade": 5,
+    "valor_unitario": 10.00,
+    "funcionario_id": 1
+}
+
+# 3. insere coxinha qtd 2
+POST {{url}}/comanda/1/produto
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "produto_id": 2,
+    "quantidade": 2,
+    "valor_unitario": 8.00,
+    "funcionario_id": 1
+}
+
+# 4. insere pastel assado qtd 1
+POST {{url}}/comanda/1/produto
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "produto_id": 3,
+    "quantidade": 1,
+    "valor_unitario": 12.00,
+    "funcionario_id": 1
+}
+
+# 5. insere pastel de carne dnv
+POST {{url}}/comanda/1/produto
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "produto_id": 1,
+    "quantidade": 1,
+    "valor_unitario": 10.00,
+    "funcionario_id": 1
+}
+
+# 6. edita de 5 pra 3
+PUT {{url}}/comanda/produto/1
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "quantidade": 3
+}
+
+# 7. deleta pastel assado
+DELETE {{url}}/comanda/produto/3
+Authorization: Bearer {{access_token}}
+
+# 8. lista todos os itens da comanda
+GET {{url}}/comanda/1/produtos
+Authorization: Bearer {{access_token}}
