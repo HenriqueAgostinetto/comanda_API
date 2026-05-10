@@ -1,0 +1,64 @@
+# Henrique Agostinetto Piva
+
+### Health Check da API
+GET http://localhost:8000/health HTTP/1.1
+
+### Testar Rate Limit
+GET http://localhost:8000/health HTTP/1.1
+
+### Verbo POST – adicionar funcionario
+POST http://localhost:8000/funcionario/ HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "henrique agostinetto piva ",
+    "matricula": "9999",
+    "cpf": "11122233344",
+    "telefone": "99999999",
+    "grupo": 1,
+    "senha": "senha",
+    "email": "teste@auditoria.com"
+}
+
+### Login para obter access e refresh tokens
+POST http://localhost:8000/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "cpf": "11122233344",
+    "senha": "senha"
+}
+
+### token gerado
+@access_token = cole_o_token_aqui
+
+### Verbo PUT – atualiza cliente
+PUT http://localhost:8000/cliente/1 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+    "nome": "Cliente Teste",
+    "cpf": "12312312312",
+    "telefone": "00000000"
+}
+
+### Verbo DELETE - excluir produto
+DELETE http://localhost:8000/produto/1 HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+### Verbo GET - listar auditoria filtro CREATE
+GET http://localhost:8000/auditoria?acao=CREATE HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+### Verbo GET - listar auditoria filtro UPDATE
+GET http://localhost:8000/auditoria?acao=UPDATE HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+### Verbo GET - listar auditoria filtro DELETE
+GET http://localhost:8000/auditoria?acao=DELETE HTTP/1.1
+Authorization: Bearer {{access_token}}
+
+### Verbo GET - listar auditoria filtro LOGIN
+GET http://localhost:8000/auditoria?acao=LOGIN HTTP/1.1
+Authorization: Bearer {{access_token}}

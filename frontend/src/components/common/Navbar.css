@@ -1,0 +1,171 @@
+body.theme-dark {
+  --bg-metal: #000000;
+  --bg-metal-light: #151515;
+  --accent-metal: #b20000;
+  --text-metal: #b3b3b3;
+  --text-hover: #ffffff;
+}
+
+body.theme-light {
+  --bg-metal: #ffffff;
+  --bg-metal-light: #f8fafc;
+  --accent-metal: #d32f2f;
+  --text-metal: #475569;
+  --text-hover: #0f172a;
+}
+
+.metal-navbar {
+  background: linear-gradient(180deg, var(--bg-metal-light) 0%, var(--bg-metal) 100%);
+  border-bottom: 3px solid var(--accent-metal);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.metal-brand {
+  color: var(--text-hover);
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px var(--accent-metal);
+  margin: 0;
+}
+
+.metal-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.metal-nav-link {
+  color: var(--text-metal);
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 8px 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.metal-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: var(--accent-metal);
+  transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 0 8px var(--accent-metal);
+}
+
+.metal-nav-link:hover, 
+.metal-nav-link.active {
+  color: var(--text-hover);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.metal-nav-link:hover::after, 
+.metal-nav-link.active::after {
+  width: 100%;
+}
+
+.metal-profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #444;
+  object-fit: cover;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.metal-profile-pic:hover {
+  border-color: var(--accent-metal);
+  box-shadow: 0 0 15px rgba(178, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.metal-logout-btn {
+  background: transparent;
+  border: 1px solid var(--accent-metal);
+  color: var(--accent-metal);
+  padding: 8px 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.metal-logout-btn:hover {
+  background: var(--accent-metal);
+  color: white;
+  box-shadow: 0 0 15px rgba(178, 0, 0, 0.6);
+}
+
+.metal-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-metal);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.metal-hamburger:hover {
+  color: var(--accent-metal);
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-metal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.theme-toggle-btn:hover {
+  color: var(--accent-metal);
+  transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+  .metal-hamburger {
+    display: block;
+  }
+  
+  .metal-menu {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: var(--bg-metal-light);
+    flex-direction: column;
+    padding: 20px 0;
+    border-bottom: 3px solid var(--accent-metal);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.4s ease-in-out;
+  }
+
+  .metal-menu.open {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .metal-nav-link {
+    font-size: 1.2rem;
+    padding: 15px 0;
+  }
+}

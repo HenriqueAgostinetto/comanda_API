@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+body.theme-dark {
+  color: #ffffff !important;
+}
+
+body.theme-light {
+  color: #0f172a !important;
+}
+
+body.theme-dark h1,                                               
+body.theme-dark h2, 
+body.theme-dark h3, 
+body.theme-dark h4, 
+body.theme-dark h5, 
+body.theme-dark h6, 
+body.theme-dark p, 
+body.theme-dark span, 
+body.theme-dark div {
+  color: #ffffff;
+}
+
+body.theme-light h1, 
+body.theme-light h2, 
+body.theme-light h3, 
+body.theme-light h4, 
+body.theme-light h5, 
+body.theme-light h6, 
+body.theme-light p, 
+body.theme-light span, 
+body.theme-light div {
+  color: #0f172a;
+}
