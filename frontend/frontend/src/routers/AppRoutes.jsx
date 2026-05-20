@@ -3,7 +3,7 @@ import { useContext, lazy, Suspense } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import Layout from '../components/Layout';
 import Login from '../pages/Login';
-import NotFound from '../pages/NotFound';
+import NotFound from '../pages/NotFound';         // henrique agostinetto piva
 
 // lazy loading para performance
 const Dashboard = lazy(() => import('../pages/Dashboard'));

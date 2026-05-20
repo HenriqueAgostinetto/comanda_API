@@ -5,7 +5,7 @@ export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ p: 4, textAlign: 'center' }}>                                                                                  // hernique agostinetto piva
+    <Box sx={{ p: 4, textAlign: 'center' }}>    // hernique agostinetto piva
       <Typography variant="h3" color="error" gutterBottom>ERRO 404</Typography>
       <Typography variant="h6" gutterBottom>Página não encontrada, verifique se a rota esta correta!
       </Typography>

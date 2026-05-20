@@ -1,39 +1,46 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import { CustomThemeProvider } from './context/ThemeContext';
-import Layout from './components/common/Layout';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Funcionarios from './pages/Funcionarios';                                  // hernique agostinetto piva
-import CadastraFuncionario from './pages/CadastraFuncionario';
 import Clientes from './pages/Clientes';
-import CadastraCliente from './pages/CadastraCliente';
 import Produtos from './pages/Produtos';
-import CadastraProduto from './pages/CadastraProduto';
+import Funcionarios from './pages/Funcionarios';
+import Comandas from './pages/Comandas';
+import Caixa from './pages/Caixa';
 import NotFound from './pages/NotFound';
+import Navbar from './components/common/Navbar';
+import { Box } from '@mui/material';
+                    // henrique agostinetto piva
+function PrivateRoute({ children }) {
+  const { authenticated } = useContext(AuthContext);
+  return authenticated ? children : <Navigate to="/" />;
+}
+
+function PrivateLayout() {
+  return (
+    <Box sx={{ minHeight: '100vh', bgcolor: 'var(--bg-app)', color: 'var(--text-main)' }}>
+      <Navbar />
+      <Outlet />
+    </Box>
+  );
+}
 
 export default function App() {
   return (
-    <AuthProvider>
-      <CustomThemeProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            
-            <Route element={<Layout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/funcionarios" element={<Funcionarios />} />
-              <Route path="/cadastra-funcionario" element={<CadastraFuncionario />} />
-              <Route path="/clientes" element={<Clientes />} />
-              <Route path="/cadastra-cliente" element={<CadastraCliente />} />
-              <Route path="/produtos" element={<Produtos />} />
-              <Route path="/cadastra-produto" element={<CadastraProduto />} />
-            </Route>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      
+      <Route element={<PrivateRoute><PrivateLayout /></PrivateRoute>}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/clientes" element={<Clientes />} />
+        <Route path="/produtos" element={<Produtos />} />
+        <Route path="/funcionarios" element={<Funcionarios />} />
+        <Route path="/comandas" element={<Comandas />} />
+        <Route path="/caixa" element={<Caixa />} />
+      </Route>
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </CustomThemeProvider>
-    </AuthProvider>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }

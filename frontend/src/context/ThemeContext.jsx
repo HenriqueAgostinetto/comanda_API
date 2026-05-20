@@ -1,40 +1,39 @@
-import { createContext, useState, useMemo, useEffect } from 'react';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { createContext, useState, useEffect } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 
 export const ThemeContext = createContext();
-
+        // henrique agostinetto piva
 export function CustomThemeProvider({ children }) {
-  const [mode, setMode] = useState(localStorage.getItem('themeMode') || 'dark');
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
-    localStorage.setItem('themeMode', mode);
-    document.body.className = mode === 'dark' ? 'theme-dark' : 'theme-light';
-  }, [mode]);
+    if (darkMode) {
+      document.body.classList.add('theme-dark');
+      document.body.classList.remove('theme-light');
+    } else {
+      document.body.classList.add('theme-light');
+      document.body.classList.remove('theme-dark');
+    }
+  }, [darkMode]);
 
   const toggleTheme = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setDarkMode(!darkMode);
   };
 
-  const theme = useMemo(() => createTheme({
+  const muiTheme = createTheme({
     palette: {
-      mode,                                                                                                                         // hernique agostinetto piva
-      ...(mode === 'dark'
-        ? {
-            primary: { main: '#b20000' },
-            background: { default: '#0a0a0a', paper: '#1a1a1a' },
-            text: { primary: '#ffffff', secondary: '#b3b3b3' },
-          }
-        : {
-            primary: { main: '#d32f2f' },
-            background: { default: '#f1f5f9', paper: '#ffffff' },
-            text: { primary: '#0f172a', secondary: '#475569' },
-          }),
+      mode: darkMode ? 'dark' : 'light'
     },
-  }), [mode]);
+    components: {
+      MuiOutlinedInput: { styleOverrides: { root: { borderRadius: 0 } } },
+      MuiButton: { styleOverrides: { root: { borderRadius: 0 } } },
+    },
+  });
 
   return (
-    <ThemeContext.Provider value={{ mode, toggleTheme }}>
-      <ThemeProvider theme={theme}>
+    <ThemeContext.Provider value={{ darkMode, toggleTheme }}>
+      <ThemeProvider theme={muiTheme}>
         <CssBaseline />
         {children}
       </ThemeProvider>

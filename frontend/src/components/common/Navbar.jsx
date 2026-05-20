@@ -1,65 +1,143 @@
 import { useState, useContext } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Button, Box, Avatar, IconButton, Menu, Chip } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { ThemeContext } from '../../context/ThemeContext';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import BadgeIcon from '@mui/icons-material/Badge';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-
-import './Navbar.css';
-                                                                                      // hernique agostinetto piva
 export default function Navbar() {
-  const { isAuth, logout } = useContext(AuthContext);
-  const { mode, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
+  const { darkMode, toggleTheme } = useContext(ThemeContext);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
-  if (!isAuth) return null;
+  const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
+  const handleCloseMenu = () => setAnchorEl(null);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
-
-  const closeMenu = () => setIsOpen(false);
-  const menuItems = ['dashboard', 'funcionarios', 'clientes', 'produtos', 'comandas', 'caixa', 'perfil'];
+  const navItems = [
+    { label: 'Dashboard', path: '/dashboard' },
+    { label: 'Comandas', path: '/comandas' },
+    { label: 'Caixa', path: '/caixa' },
+    { label: 'Clientes', path: '/clientes' },
+    { label: 'Produtos', path: '/produtos' },
+    { label: 'Funcionários', path: '/funcionarios' }
+  ];
 
   return (
-    <nav className="metal-navbar">
-      <h1 className="metal-brand">comandas</h1>
-
-      <button className="metal-hamburger" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />}
-      </button>
-
-      <div className={`metal-menu ${isOpen ? 'open' : ''}`}>
-        {menuItems.map((item) => (
-          <NavLink 
-            key={item} 
-            to={`/${item}`} 
-            className={({ isActive }) => `metal-nav-link ${isActive ? 'active' : ''}`}
-            onClick={closeMenu}
+    <AppBar position="sticky" sx={{ bgcolor: 'var(--bg-surface)', borderBottom: '1px solid var(--border-main)', boxShadow: 'none', backgroundImage: 'none' }}>
+      <Toolbar sx={{ justifyContent: 'space-between', px: 4 }}>
+        
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <Typography 
+            onClick={() => navigate('/dashboard')}
+            className="click-effect"
+            sx={{ fontWeight: 900, fontSize: '1.4rem', letterSpacing: '-1px', cursor: 'pointer', textTransform: 'uppercase', color: 'var(--text-main)' }}
           >
-            {item}
-          </NavLink>
-        ))}
+            Zé<span style={{ color: 'var(--accent-blue)' }}>.</span>
+          </Typography>
+          
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            {navItems.map((item) => (
+              <Button 
+                key={item.label}
+                onClick={() => navigate(item.path)}
+                className="nav-link-animated click-effect"
+                sx={{ 
+                  color: 'var(--text-main)', 
+                  fontWeight: 700, 
+                  fontSize: '0.75rem', 
+                  borderRadius: 0,
+                  px: 0.5,
+                  minWidth: 'auto',
+                  '&:hover': { color: 'var(--accent-blue)', bgcolor: 'transparent' } 
+                }}
+              >
+                {item.label}
+              </Button>
+            ))}
+          </Box>
+        </Box>
 
-        <button onClick={toggleTheme} className="theme-toggle-btn">
-          {mode === 'dark' ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
-        </button>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <IconButton onClick={toggleTheme} className="click-effect">
+            {darkMode ? <Brightness7Icon fontSize="small" /> : <Brightness4Icon fontSize="small" />}
+          </IconButton>
+          
+          <Avatar 
+            onClick={handleOpenMenu}
+            src="/henriqueagostinettopiva.png"
+            className="click-effect"
+            sx={{ 
+              width: 38, height: 38, 
+              border: '2px solid var(--border-main)', 
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+              '&:hover': { borderColor: 'var(--accent-blue)' }
+            }}
+          />
 
-        <img 
-          src="/henriqueagostinettopiva.png" 
-          alt="perfil" 
-          className="metal-profile-pic" 
-        />
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleCloseMenu}
+            slotProps={{
+              paper: {
+                elevation: 10,
+                sx: {
+                  mt: 1.5, p: 2, minWidth: '240px', borderRadius: 0,
+                  bgcolor: 'var(--bg-surface)', border: '1px solid var(--border-main)',
+                  '&::before': {
+                    content: '""', display: 'block', position: 'absolute', top: 0, right: 14, width: 10, height: 10,
+                    bgcolor: 'var(--bg-surface)', transform: 'translateY(-50%) rotate(45deg)',
+                    borderLeft: '1px solid var(--border-main)', borderTop: '1px solid var(--border-main)',
+                  },
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          >
+            <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+              <Avatar src="/henriqueagostinettopiva.png" sx={{ width: 45, height: 45, border: '1px solid var(--border-main)' }} />
+              <Box>
+                <Typography sx={{ fontWeight: 900, fontSize: '0.95rem', color: 'var(--text-main)' }}>
+                   {user?.nome || 'Henrique Piva'}
+                </Typography>
+                <Chip 
+                  label={user?.cargo || 'Administrador'} 
+                  size="small" 
+                  sx={{ bgcolor: 'var(--color-error)', color: '#fff !important', fontWeight: 900, fontSize: '0.65rem', height: '18px', borderRadius: '2px', mt: 0.5 }} 
+                />
+              </Box>
+            </Box>
 
-        <button onClick={handleLogout} className="metal-logout-btn">
-          sair
-        </button>
-      </div>
-    </nav>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, pt: 2, borderTop: '1px solid var(--border-main)' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <AssignmentIndIcon sx={{ fontSize: '1.1rem', color: 'var(--accent-blue) !important' }} />
+                <Typography sx={{ fontSize: '0.8rem', fontWeight: 600 }}>CPF: {user?.cpf || '1'}</Typography>
+              </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <BadgeIcon sx={{ fontSize: '1.1rem', color: 'var(--accent-blue) !important' }} />
+                <Typography sx={{ fontSize: '0.8rem', fontWeight: 600 }}>Matrícula: {user?.matricula || '1'}</Typography>
+              </Box>
+            </Box>
+          </Menu>
+
+          <IconButton 
+            onClick={() => logout()} 
+            className="click-effect" 
+            sx={{ color: 'var(--text-main)', '&:hover': { color: 'var(--color-error)' } }}
+          >
+            <LogoutIcon fontSize="small" />
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
+// henrique agostinetto piva

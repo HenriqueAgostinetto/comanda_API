@@ -1,15 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from './Navbar'; 
 import { Box } from '@mui/material';
+import Navbar from './Navbar';
 
-export default function Layout() {                                        // hernique agostinetto piva
+export default function Layout() {                    // henrique agostinetto piva
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', bgcolor: 'background.default' }}>
-      {/*  Navbar   */}
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', bgcolor: '#f8fafc' }}>
       <Navbar />
-      
-      {/*  paginaas     */}
-      <Box component="main" sx={{ p: 4, flexGrow: 1 }}>
+
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}> 
         <Outlet />
       </Box>
     </Box>
