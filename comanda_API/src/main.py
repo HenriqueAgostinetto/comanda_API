@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import uvicorn
 
@@ -23,7 +24,7 @@ from routers import (
 from infra import database
 
 
-# lifespan - ciclo de vida da aplicação
+# lifespan - ciclo de vida da aplicacao
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("API has started")
@@ -34,6 +35,15 @@ async def lifespan(app: FastAPI):
 
 # FastAPI app
 app = FastAPI(lifespan=lifespan)
+
+# configuracao do cors - permite que o frontend se conecte a api
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # permite requisições de qualquer origem (ideal para dev)
+    allow_credentials=True,
+    allow_methods=["*"],  # permite todos os metodos (POST, GET, PUT, DELETE)
+    allow_headers=["*"],  # permite todos os cabecalhos (incluindo o token de autorizacao)
+)
 
 # Rate limit config
 app.state.limiter = limiter
